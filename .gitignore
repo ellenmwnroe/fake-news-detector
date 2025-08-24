@@ -1,0 +1,14 @@
+# Python / Backend
+/backend/venv/
+__pycache__/
+*.pyc
+
+# React / Frontend
+/frontend/node_modules/
+/frontend/build/
+.env.local
+.env.*.local
+
+# Arquivos de IDE e Sistema
+.vscode/
+.DS_Store
