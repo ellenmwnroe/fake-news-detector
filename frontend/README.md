@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# 🤖 Detector de Fake News - Desafio 4.0
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Demonstração do Chatbot](https://i.imgur.com/gO0tH8a.gif)
 
-## Available Scripts
+## 📖 Sobre o Projeto
 
-In the project directory, you can run:
+Este é um protótipo funcional de uma ferramenta de análise de notícias, desenvolvido como solução para o **Desafio 4.0** da disciplina de **Estrutura de Dados** do Centro Universitário UNDB.
 
-### `npm start`
+A aplicação utiliza uma interface de chatbot interativa onde o usuário pode submeter o título, o texto e a fonte de uma notícia. O sistema então processa essas informações através de um backend inteligente em Python, que realiza uma análise ponderada e retorna uma classificação sobre o potencial da notícia ser fake news.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ✨ Funcionalidades Principais
 
-### `npm test`
+* **Interface de Chatbot**: Uma conversa guiada para coletar os dados da notícia de forma amigável e intuitiva.
+* **Análise Ponderada**: O backend utiliza um sistema de pontuação com pesos diferentes para palavras-chave, reputação de fontes e padrões textuais (como títulos em caixa alta e excesso de pontuação).
+* **Validação de Entradas**: O sistema possui múltiplas regras para rejeitar entradas inválidas, muito curtas ou sem sentido (gibberish), retornando mensagens de erro específicas.
+* **Resultados Dinâmicos**: A resposta da análise é apresentada com cores, detalhes e um GIF correspondente à classificação (Confiável, Suspeita ou Altamente Suspeita).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## ⚙️ Como o Projeto Funciona
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A aplicação segue um fluxo de trabalho cliente-servidor bem definido para analisar cada notícia:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1.  **Coleta de Dados (Frontend - React)**: O usuário interage com o chatbot, que solicita, passo a passo, o **título**, o **texto** e a **fonte** da notícia a ser analisada.
+2.  **Requisição via API (Comunicação)**: Com todos os dados em mãos, o frontend envia um objeto JSON para o backend através de uma requisição `POST` para o endpoint `/analisar`.
+3.  **Processamento (Backend - Python/Flask)**: O servidor recebe os dados e executa uma sequência de tarefas:
+    * **Validação Rigorosa**: Primeiro, uma função de validação verifica se os dados são aceitáveis (campos não estão vazios, textos não são curtos demais ou aleatórios, URL da fonte é válida, etc.). Se algum critério falhar, ele retorna uma mensagem de erro específica imediatamente.
+    * **Análise Ponderada**: Se os dados forem válidos, o sistema calcula uma **pontuação de suspeita**. Ele soma e subtrai pontos com base em vários fatores, como a reputação da fonte, a presença de palavras-chave alarmistas e padrões de sensacionalismo no título.
+    * **Classificação Final**: Com base na pontuação total, a notícia é classificada como `PROVAVELMENTE CONFIÁVEL`, `SUSPEITA` ou `ALTAMENTE SUSPEITA`.
+4.  **Exibição do Resultado (Frontend - React)**: O frontend recebe a resposta do backend e a exibe para o usuário de forma organizada, mostrando a classificação, os detalhes da análise e um GIF que representa visualmente o resultado.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🛠️ Tecnologias Utilizadas
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Este projeto foi construído utilizando uma arquitetura cliente-servidor:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* **Frontend (Cliente):**
+    * [**React.js**](https://reactjs.org/): Biblioteca JavaScript para construir a interface de usuário.
+    * **CSS-in-JS**: Para a estilização dos componentes.
+* **Backend (Servidor):**
+    * [**Python**](https://www.python.org/): Linguagem principal para a lógica de análise.
+    * [**Flask**](https://flask.palletsprojects.com/): Micro-framework para criar a API que conecta o frontend e o backend.
+    * **Estruturas de Dados**: Uso intensivo de **Dicionários** para a pontuação ponderada e **Conjuntos** para buscas eficientes, conforme solicitado no desafio.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🚀 Como Executar o Projeto Localmente
 
-## Learn More
+Para rodar a aplicação na sua máquina, você precisará ter o **Node.js** e o **Python** instalados. Siga os passos abaixo:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 1. Configurando o Backend (Servidor Python)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Primeiro, vamos iniciar o "cérebro" da aplicação.
 
-### Code Splitting
+```bash
+# 1. Navegue até a pasta do backend
+cd backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# 2. Crie e ative um ambiente virtual
+python -m venv venv
+./venv/Scripts/activate
 
-### Analyzing the Bundle Size
+# 3. Instale as dependências necessárias
+pip install Flask Flask-CORS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# 4. Inicie o servidor Flask
+flask --app app.py run
