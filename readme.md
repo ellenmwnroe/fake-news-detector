@@ -1,7 +1,5 @@
 # 🤖 Detector de Fake News - Desafio 4.0
 
-![Demonstração do Chatbot](https://i.imgur.com/gO0tH8a.gif)
-
 ## 📖 Sobre o Projeto
 
 Este é um protótipo funcional de uma ferramenta de análise de notícias, desenvolvido como solução para o **Desafio 4.0** da disciplina de **Estrutura de Dados** do Centro Universitário UNDB.
